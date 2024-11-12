@@ -1,21 +1,31 @@
-import AuthLayout from "@/features/auth/layouts/auth-layout";
+import { createBrowserRouter } from "react-router-dom";
+
 import SignIn from "@/features/auth/pages/sign-in";
 import SignUp from "@/features/auth/pages/sign-up";
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import AuthLayout from "@/features/auth/layouts/auth-layout";
+import AppLayout from "@/layouts/app-layout";
 
 const router = createBrowserRouter(
   [
     {
       path: "/",
-      element: <Navigate to="/sign-in" replace={true} />,
+      element: <AppLayout />,
     },
     {
-      path: "/",
-      element: <AuthLayout />,
-      children: [
-        { path: "sign-in", element: <SignIn /> },
-        { path: "sign-up", element: <SignUp /> },
-      ],
+      path: "/sign-in",
+      element: (
+        <AuthLayout>
+          <SignIn />
+        </AuthLayout>
+      ),
+    },
+    {
+      path: "/sign-up",
+      element: (
+        <AuthLayout>
+          <SignUp />
+        </AuthLayout>
+      ),
     },
   ],
   {
